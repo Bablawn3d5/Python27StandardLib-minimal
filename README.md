@@ -24,5 +24,12 @@ The distribution comes with a builds a ZIPs of library.
 You can then pragmatically include the standard lib by calling:
 
 ```
-   sys.path.import(0, 'PythonLib27-minimal.zip')
+    // Set path so we can find the python27.zip
+    Py_NoSiteFlag = 1;
+    Py_SetPythonHome(lib_paths);
+    Py_InitializeEx(0);
+
+    // Assuming python27.zip is our python lib zip.
+    PyRun_SimpleString("import sys");
+    PyRun_SimpleString("sys.path = ['.','python27.zip']");
 ```
